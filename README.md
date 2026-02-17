@@ -69,13 +69,6 @@ Our model demonstrates broad versatility across different infrared spectra.
 | **RASMD (SWIR)** | x4 | **0.1535** | Best (vs. HAT 0.1560) |
 | **TNO (LWIR)** | x4 | **0.2501** | Competitive (vs. HAT 0.2475) |
 
-### Visual Comparison
-
-<p align="center">
-  <img src="assets/visual_comparison.png" alt="Visual Results" width="800"/>
-</p>
-
-> RPT-SR restores sharper edges and finer textures compared to existing methods, effectively handling the "Structural Amnesia" problem.
 
 ---
 
