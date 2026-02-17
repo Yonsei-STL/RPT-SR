@@ -5,6 +5,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/Yonsei-STL/RPT-SR?style=social)](https://github.com/Yonsei-STL/RPT-SR)
 
 > **RPT-SR: Regional Prior Attention Transformer for Infrared Image Super-Resolution**
+>
 > Youngwan Jin, Incheol Park, Yagiz Nalcakan, Hyeongjin Ju, Sanghyeop Yeo, Shiho Kim  
 > *WACV 2026 (Winter Conference on Applications of Computer Vision)*
 
