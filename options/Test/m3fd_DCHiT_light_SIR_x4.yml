@@ -1,0 +1,67 @@
+
+# general settings
+name: DCHiT_light_SIR_x4
+model_type: DCHITModel
+scale: 4
+num_gpu: 1
+manual_seed: 1226
+
+datasets:
+  test_1:  # the 1st test dataset
+    task: SR
+    name: M3FD_SR
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nas_109/jyw/im2im/data/M3FD_SR/test/HR
+    dataroot_lq: /mnt/nas_109/jyw/im2im/data/M3FD_SR/test/x4
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+      
+  test_2:  # the 1st test dataset
+    task: SR
+    name: TNO_SR
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nas_109/jyw/im2im/data/tno_sr/HR
+    dataroot_lq: /mnt/nas_109/jyw/im2im/data/tno_sr/x4
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: DCHiT_SIR
+  upscale: 4
+  in_chans: 3
+  img_size: 128
+  base_win_size: [8,8]
+  img_range: 1.
+  depths: [4,4,4,4]
+  embed_dim: 80
+  num_heads: [4,4,4,4]
+  expansion_factor: 2
+  resi_connection: '1conv'
+  hier_win_ratios: [1,1,2,2]
+  upsampler: 'pixelshuffledirect'
+gamma: "parameter"
+
+# path
+path:
+  pretrain_network_g: /mnt/nas_109/jyw/im2im/SR/HiT-SR/experiments/DCHiT_light_SIR_x4_m3fd_1/models/net_g_100000.pth
+  strict_load_g: True
+
+# validation settings
+val:
+  save_img: True
+  suffix: ~  # add suffix to saved images, if None, use exp name
+  use_chop: False  # True to save memory, if img too large
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: True
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: True

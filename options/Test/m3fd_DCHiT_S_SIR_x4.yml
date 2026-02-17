@@ -1,0 +1,60 @@
+
+# general settings
+name: DCHiT_S_SIR_x4_m3fd
+model_type: DCHITModel
+scale: 4
+num_gpu: 1
+manual_seed: 1226
+
+datasets:
+  test_1:  # the 1st test dataset
+    task: SR
+    name: M3FD_SR
+    type: PairedImageDataset
+    dataroot_gt: /mnt/nas_109/jyw/im2im/data/M3FD_SR/test/HR
+    dataroot_lq: /mnt/nas_109/jyw/im2im/data/M3FD_SR/test/x4
+    io_backend:
+      type: disk
+
+
+
+# network structures
+network_g:
+  type: DCHiT_SIR
+  upscale: 4
+  in_chans: 3
+  img_size: 128
+  base_win_size: [8,8]
+  img_range: 1.
+  depths: [4,4,4,4]
+  embed_dim: 240
+  num_heads: [6,6,6,6]
+  expansion_factor: 2
+  resi_connection: '1conv'
+  hier_win_ratios: [1,2,2,4]
+  upsampler: 'pixelshuffledirect'
+gamma: "parameter"
+
+# path
+path:
+  pretrain_network_g: /mnt/nas_109/jyw/im2im/SR/experiments/DCHiT_S_SIR_x4_m3fd-sota/models/net_g_100000.pth
+  strict_load_g: True
+
+# validation settings
+val:
+  save_img: True
+  suffix: ~  # add suffix to saved images, if None, use exp name
+  use_chop: False  # True to save memory, if img too large
+  dump_rpa: True           # ★ attention 시각화 모드 ON
+  rpa_layers: [[0, 0], [3, -1]]   # Stage-1 첫 RPAL, Stage-4 마지막 RPAL
+  rpa_mode: full
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: True
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: True
