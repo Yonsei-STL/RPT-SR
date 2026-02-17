@@ -24,7 +24,7 @@ By explicitly encoding scene layout information into the attention mechanism, RP
 ## 🚀 Motivation
 
 <p align="center">
-  <img src="assets/motivation.png" alt="Structural Amnesia" width="600"/>
+  <img src="figure/structure_amnesia.png" alt="Structural Amnesia" width="600"/>
 </p>
 
 * **Fixed-Viewpoint Inefficiency:** Cameras in CCTV or ADAS often capture scenes with repetitive structures (e.g., roads, buildings).
@@ -36,7 +36,7 @@ By explicitly encoding scene layout information into the attention mechanism, RP
 ## 🏗️ Architecture
 
 <p align="center">
-  <img src="assets/architecture.png" alt="RPT-SR Architecture" width="800"/>
+  <img src="figure/architecture.png" alt="RPT-SR Architecture" width="800"/>
 </p>
 
 ### Regional Prior Attention (RPA)
